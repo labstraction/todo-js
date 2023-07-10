@@ -7,12 +7,12 @@ class Manager{
         this.todoArray.push(todo);
     }
 
-    orderTodosByName(){
-        this.todoArray.sort((todo1,todo2)=>todo1.title.localeCompare(todo2.title));
+    orderTodosByTitle(){
+        this.todoArray.sort((todo1,todo2)=>todo1.compareByTitle(todo2));
     }
 
     orderTodosByDate(){
-
+        this.todoArray.sort((todo1,todo2)=>todo1.compareByDate(todo2));
     }
 
 }

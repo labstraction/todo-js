@@ -34,8 +34,8 @@ function render(){
 
 render();
 
-function orderByName(){
-    manager.orderTodosByName();
+function orderByTitle(){
+    manager.orderTodosByTitle();
     render();
 }
 

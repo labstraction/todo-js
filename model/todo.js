@@ -5,4 +5,11 @@ class Todo{
         this.creationDate = creationDate;
     }
 
+    compareByTitle(todo){
+        return this.title.localeCompare(todo.title);
+    }
+
+    compareByDate(todo){
+        return todo.creationDate.getTime() - this.creationDate.getTime();
+    }
 }
