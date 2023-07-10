@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    
+    <header>
+        <h1>To do list</h1>
+    </header>
+    <main>
+        <div>
+            <button onclick="orderByName()">Ordina per nome</button>
+            <button onclick="orderByDate()">Ordina per data</button>
+        </div>
+        <div id="todo-container">
+
+        </div>
+    </main>
 </body>
-<script src="./model/to-do.js"></script>
-<script src="./model/todos-manager.js"></script>
+<script src="./model/todo.js"></script>
+<script src="./model/manager.js"></script>
 <script src="./services/data-service.js"></script>
 <script src="./services/storage-service.js"></script>
 <script src="./main.js"></script>
