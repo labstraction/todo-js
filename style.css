@@ -1,3 +1,8 @@
+body{
+    height: 100vh;
+    margin: 0px;
+}
+
 .todo-card{
     border: 1px solid crimson;
     display: flex;
@@ -6,6 +11,38 @@
     margin: 4px;
 }
 
+header{
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgreen;
+}
+
+header h1{
+    margin: 0px;
+}
+
 .todo-completed{
     border-color: lime ;
+    
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    /* justify-content: space-between; */
+}
+
+.spacer{
+    flex: 1;
+}
+
+.add-todo-container{
+    padding: 8px;
+}
+
+#add-todo-input:focus{
+    outline: none;
 }

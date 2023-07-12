@@ -1,6 +1,13 @@
 // console.log(DataServices.getData());
-const todos = DataServices.getData();
-const manager = new Manager(todos);
+// const todos= StorageService.loadTodos();
+// let manager;
+// // if (todos) {
+// //     manager = new Manager(todos);
+// // } else {
+// //     manager = new Manager();
+// // }
+
+let manager = new Manager();
 
 console.log(document);
 
@@ -9,7 +16,10 @@ function render(){
     const todoContainer=document.getElementById('todo-container'); 
     todoContainer.innerHTML= '';
 
-    for (const todo of manager.todoArray) {
+    for (let i = 0; i < manager.todoArray.length; i++) {
+
+        const todo = manager.todoArray[i];
+
         const div=document.createElement('div');
         div.classList.add('todo-card');
 
@@ -33,7 +43,8 @@ function render(){
         const completeBtn = document.createElement('button');
         const completeNode = document.createTextNode( todo.isCompleted ? 'da completare' : 'completato');
         completeBtn.addEventListener('click', () => {
-            todo.isCompleted = !todo.isCompleted;
+            manager.changeCompleteStatus(i);
+            // StorageService.saveData(manager.todoArray);
             render();
         });
         // completeBtn.addEventListener('mouseover', () => div.style.borderWidth = '3px');
@@ -46,7 +57,8 @@ function render(){
         const deleteBtn = document.createElement('button');
         const deleteNode = document.createTextNode('cancella');
         deleteBtn.addEventListener('click', () => {
-            manager.deleteTodo(i)
+            manager.deleteTodo(i);
+            // StorageService.saveData(manager.todoArray);
             render();
         });
         // completeBtn.addEventListener('mouseover', () => div.style.borderWidth = '3px');
@@ -59,7 +71,7 @@ function render(){
     }
 }
 
-// render();
+render();
 
 // function render2(){
 
@@ -116,3 +128,23 @@ function orderByDate(){
 ///1) aggiungere il tasto cancella su ogni todo
 ///2) aggiungere la possibilità di aggiungere todo alla lista 
 //////tramite una input e un bottone aggiungi 
+
+function addTodo(){
+    const input = document.getElementById('add-todo-input')
+    const newTodoTitle = input.value;
+    if(newTodoTitle.trim() !== ''){
+        // const newTodo = new Todo(newTodoTitle);
+        // manager.addTodo(newTodo);
+        manager.addTodoWithTitle(newTodoTitle);
+        //StorageService.saveData(manager.todoArray);
+        input.value = '';
+    }
+    render();
+
+    // let inputValue = document.getElementById('add-todo-input').value;
+    // if (inputValue.trim()) {
+    //     manager.addTodoWithTitle(inputValue);
+    //     document.getElementById('add-todo-input').value = '';
+    // }
+    // render();
+}
