@@ -10,7 +10,11 @@ class Manager{
         } else {
             this.todoArray = todoArray;
         }
-        
+
+        setInterval(() => {
+            console.log('sto salvando')
+            StorageService.saveData(this.todoArray);
+        }, 5000);
     }
 
     addToDo(todo){
@@ -28,18 +32,18 @@ class Manager{
     changeCompleteStatus(index){
         const todo = this.todoArray[index];
         todo.isCompleted = !todo.isCompleted;
-        StorageService.saveData(this.todoArray);
+        //StorageService.saveData(this.todoArray);
     }
 
     deleteTodo(index){
         this.todoArray.splice(index, 1);
-        StorageService.saveData(this.todoArray);
+        //StorageService.saveData(this.todoArray);
     }
 
     addTodoWithTitle(title){
         const newTodo = new Todo(title);
         this.addToDo(newTodo);
-        StorageService.saveData(this.todoArray);
+        //StorageService.saveData(this.todoArray);
     }
 
 }
