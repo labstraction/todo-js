@@ -1,8 +1,9 @@
 class Todo{
-    constructor(title, isCompleted = false, creationDate = new Date()){
+    constructor(title, isCompleted = false, creationDate = new Date(), id){
         this.title = title;
         this.isCompleted = isCompleted;
         this.creationDate = creationDate;
+        this.id = id;
     }
 
     compareByTitle(todo){
