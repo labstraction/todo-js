@@ -40,9 +40,25 @@ function render(){
         const completeBtn = document.createElement('button');
         const completeNode = document.createTextNode( todo.isCompleted ? 'da completare' : 'completato');
         completeBtn.addEventListener('click', () => {
-            manager.changeCompleteStatus(i);
+
+            const modifiedTodo = {...todo};
+
+            if (modifiedTodo.isCompleted === true) {
+                modifiedTodo.isCompleted = false;
+            } else {
+                modifiedTodo.isCompleted = true;
+            }
+
+            // modifiedTodo.isCompleted = !modifiedTodo.isCompleted;
+
+            DBService.updateTodo(modifiedTodo).then(res => {
+                manager.changeCompleteStatus(i);
+                render();
+            })
+
+            
             // StorageService.saveData(manager.todoArray);
-            render();
+            
         });
         // completeBtn.addEventListener('mouseover', () => div.style.borderWidth = '3px');
         // completeBtn.addEventListener('mouseleave', () => div.style.borderWidth = '1px');
@@ -149,13 +165,22 @@ function addTodo(){
     const input = document.getElementById('add-todo-input')
     const newTodoTitle = input.value;
     if(newTodoTitle.trim() !== ''){
+
+        const newTodo = new Todo(newTodoTitle, false, new Date());
+
+        DBService.saveTodo(newTodo).then(res => {
+            manager.addTodo(res);
+            input.value = '';
+            render();
+        })
+
         // const newTodo = new Todo(newTodoTitle);
         // manager.addTodo(newTodo);
-        manager.addTodoWithTitle(newTodoTitle);
+        //manager.addTodoWithTitle(newTodoTitle);
         //StorageService.saveData(manager.todoArray);
-        input.value = '';
+        //input.value = '';
     }
-    render();
+    //render();
 
     // let inputValue = document.getElementById('add-todo-input').value;
     // if (inputValue.trim()) {

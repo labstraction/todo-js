@@ -19,23 +19,41 @@ class DBService{
 
     //PUT
     static updateTodo(todo){
-
+        const updateUrl = 'https://64b512c1f3dbab5a95c6a48c.mockapi.io/todos/' + todo.id;
+        return fetch(updateUrl, {method: 'put', 
+                                 body: JSON.stringify(todo),
+                                 headers: {
+                                    'content-type':'application/json'
+                                 }})
+                    .then(resp => resp.json())
+                    .then(res => this.convertToTodo(res))
     }
 
     //UPDATE
     static saveTodo(todo){
-
+        const postUrl = 'https://64b512c1f3dbab5a95c6a48c.mockapi.io/todos'
+        return fetch(postUrl, {method: 'post', 
+                                 body: JSON.stringify(todo),
+                                 headers: {
+                                    'content-type':'application/json'
+                                 }})
+                    .then(resp => resp.json())
+                    .then(res => this.convertToTodo(res))
     }
 
 
+    static convertToTodo(obj){
+        const newTodo = new Todo(obj.title, obj.isCompleted, new Date(obj.creationDate), obj.id);
+        return newTodo;
+    }
 
     static convertToTodoArray(genericArray){
 
         const tempArray = [];
 
         for (const obj of genericArray) {
-            const newTodo = new Todo(obj.title, obj.isCompleted, new Date(obj.creationDate), obj.id)
-            tempArray.push(newTodo);
+            //const newTodo = new Todo(obj.title, obj.isCompleted, new Date(obj.creationDate), obj.id)
+            tempArray.push(this.convertToTodo(obj));
         }
 
         return tempArray;
